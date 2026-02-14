@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  log-monitor:
+    build: .
+    container_name: log-monitor
+    ports:
+      - "5000:5000"
+    environment:
+      - CPU_THRESHOLD=80
+      - MEM_THRESHOLD=80
+      - DISK_THRESHOLD=80
+      - INTERVAL=10
+    volumes:
+      - log-data:/app/logs
+    restart: unless-stopped
+
+volumes:
+  log-data:
